@@ -4,11 +4,10 @@ input [N-1:0] A,
 input [N-1:0] B,
 
 output [N-1:0] alu_result,
-output carry_o
+output zero
 );
 
 wire [N-1:0] internal[3:0];
-wire carry_temp [1:0];
 
 
 and_alu #(.N(N)) and_AB(
@@ -26,19 +25,21 @@ or_alu #(.N(N)) or_AB(
 sumador #(.N(N)) sumador_alu(
     .a_i(A),
     .b_i(B),
-    .sum_o(internal[2]),
-    .carry_o(carry_o)
+    .sum_o(internal[2])
 );
 
 restador #(.N(N)) restador_alu (
     .a_i(A),
     .b_i(B),
-    .sum_o(internal[2]),
-    .carry_o(carry_o)    
+    .resta_o(internal[2])   
 );
 
 mux #(.N(N))(
     .sel(alu_control),
     .in(internal),
-    .salida(alu_result)
+    .aux(internal[0]),
+    .salida(alu_result),
+    .auxiliar(zero)
 );
+
+endmodule
