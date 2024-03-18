@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 100ns / 1ps // funciona con un clock de 10MGHhz
 
 // Recuperado de [https://circuitcove.com/design-examples-register-file/]
 //Adaptado con una señal de reset
@@ -10,28 +10,28 @@ module reg_file #(
   ) 
   (
   input  logic                  clk,
-  input  logic                   rst,
+  input  logic                  rst,
   input  logic                  writeEn,
-  input  logic [DataWidth-1:0] writeData,
+  input  logic [DataWidth-1:0] 	writeData,	//Datos de entrada de ancho [DataWidth-1:0]
   
   input  logic [IndexWidth-1:0] writeAddr,
-  input  logic [IndexWidth-1:0] readAddr1,
+  input  logic [IndexWidth-1:0] readAddr1,	// direccion de los registros N registros
   input  logic [IndexWidth-1:0] readAddr2,
-  output logic [DataWidth-1:0] readData1,
-  output logic [DataWidth-1:0] readData2
+  output logic [DataWidth-1:0]  readData1,
+  output logic [DataWidth-1:0]  readData2
 );
 
   logic [DataWidth-1:0] regs[NumRegs]; // Se crea un arreglo de [NumRegs] registros de ancho [DataWidth-1:0]
 
-always_ff @(posedge clk or posedge rst) begin 
+always_ff @(posedge clk) begin 
 
-    if (rst) begin   // inicializo todos los registros en cero
+    if (rst) begin  
         foreach (regs[i]) begin  
-            regs[i] <= 0;
+            regs[i] <= 0;  // inicializo todos los registros en cero
         end
     end else begin
-      if (writeEn) begin // si hay señal de write Enable
-        regs[writeAddr] <= writeData; // Ubico el registro en la dirección [writeAddr] y le escribo el contenido de [Write_data]
+      if (writeEn) begin 		// si hay señal de write Enable
+        regs[writeAddr] <= writeData; 	// Ubico el registro en la dirección [writeAddr] y le escribo el contenido de [Write_data]
       end
     end
   end
