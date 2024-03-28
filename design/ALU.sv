@@ -1,18 +1,24 @@
 module ALU #(
-    parameter DATA_WIDTH = 32,
+    parameter DATA_WIDTH = 32
 ) (
     input logic [DATA_WIDTH-1:0] data_rs1,
     input logic [DATA_WIDTH-1:0] source_2,
     input logic [3:0] alu_inst,
 
-    output logic ALU_result,
-    output zero
+    output logic [DATA_WIDTH-1:0] ALU_result,
+    output logic zero
 );
     
-always @ (*) begin
-    if(ALUResult==0) zero = 1'b1;
+logic [DATA_WIDTH-1:0] ALUResult;
 
-    else  cero=1'b0;
+assign ALUResult = ALU_result;
+    
+always @ (*) begin
+    if(ALUResult==0)begin
+        zero = 1'b1;
+    end else begin
+         zero=1'b0;
+    end
 end
 
 
@@ -24,7 +30,7 @@ always @(*) begin
         4'b0000 : ALU_result = data_rs1 & source_2;  //AND
         4'b0001 : ALU_result = data_rs1 | source_2; //OR
 
-        default ALU_result=data + source_2;
+        default ALU_result=data_rs1 + source_2;
 endcase
 
 end

@@ -13,8 +13,9 @@ module inst_memory #(
 
 
     initial begin
-        $readmemh("programa.bin",inst_memory)
+        $readmemh("programa.bin",inst_memory);
     end
 
     assign instruction=inst_memory[address[9:2]];
+    
 endmodule

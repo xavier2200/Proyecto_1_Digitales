@@ -6,8 +6,13 @@ module ALU_CONTROL #(
     output logic [3:0] alu_inst
 );
     
-    wire [3:0] field_3 = instruccion[14:12];
-    wire I_30 = instruccion[30];
+logic [3:0] field_3 ;
+logic I_30;
+
+assign  field_3 = instruccion[14:12];
+assign  I_30 = instruccion[30];
+
+always @(*) begin
 
     case (ALU_OP)
         2'b00 : alu_inst = 4'b0010; //add
@@ -28,4 +33,6 @@ module ALU_CONTROL #(
         end
         default: alu_inst = 4'b0010; // Default case
     endcase
+end
+
 endmodule
