@@ -8,24 +8,21 @@ reg [1:0] opcode;
 
 always @* begin
 
-    opcode= {in[6:5]};
+    opcode= {in[6:0]};
 
         case (opcode)
-            {2'b10} : begin
-                inmediato= {in[N/2-1:20]};
+            {7'b0000011} : begin
+                inmediato= {in[N/2-1:20]};				//load double
             end
 
-            {2'b11} : begin
-                inmediato ={in[N/2-1:25],in[11:7]};
+            {7'b0100011} : begin
+                inmediato ={in[N/2-1:25],in[11:7]};			//store double
             end
             {2'b00} : begin
-                inmediato={in[N/2-1],in[7],in[30:25],in[11:8]};
+                inmediato={in[N/2-1],in[7],in[30:25],in[11:8]};		//branch if equal
             end
             
-            {2'b01} : begin
-                inmediato={in[N/2-1],in[7],in[30:25],in[11:8]};
-            end
-            default: inmediato=0;
+            default: inmediato=0;					//default
         endcase
         
        out= $signed(inmediato);
