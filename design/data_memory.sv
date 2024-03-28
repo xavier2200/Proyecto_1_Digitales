@@ -1,6 +1,6 @@
 module data_memory #(
 parameter W = 32,
-parameter N=5
+parameter N=5 // cantidad de registros
 )(
     input logic clk,
 
