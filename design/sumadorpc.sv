@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 
-module sumador #(parameter N = 4)(
+module sumadorpc #(parameter N = 4)(
     input [N-1:0]           a_i,
     
     output [N-1:0]          sum_o

@@ -3,8 +3,8 @@ parameter W = 32,
 parameter N=5
 )(
     input logic clk,
-
-    input logic [N-1:0] address, //direcición de 'consulta 1'
+    
+    input logic [$clog2(N)-1:0] address, //direcición de 'consulta 1'
     //input logic rst,
     input logic MemRead, //habilitación de lectura
     input logic MemWrite, //habilitación de escritura
@@ -14,14 +14,15 @@ parameter N=5
     output logic [W-1:0] read_data
 );
 //creamos propiamente el registro: 
-reg  [W-1:0] mem[(2**N)-1:0] ;
+reg  [W-1:0] mem[N-1:0] ;
 
 
 always_ff @(posedge clk) begin
-    if (MemWrite) 
-    mem[address]<=write_data;
-    else if (MemWrite)
-    read_data <= mem[address];
+    if (MemWrite) begin 
+        mem[address]<=write_data;
+    end else if (MemRead) begin
+        read_data <= mem[address];
+    end    
 end
 
 endmodule
