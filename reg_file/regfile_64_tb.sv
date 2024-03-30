@@ -59,7 +59,7 @@ module regfile_64_tb;
     $display("Contenido de los registros:");
     for (integer i = 0; i < N_tb; i++) begin
         addr_rs1_tb = i; // Selecciona el registro a mostrar
-        addr_rs2_tb = i; // Selecciona el registro a mostrar
+        addr_rs2_tb = i-1; // Selecciona el registro a mostrar
         #5; // Espera un poco para que la lectura se complete
         if (rs1_tb !== 64'hFFFFFFFFFFFFFFFF) begin
             $display("Error: El registro %0d no contiene el valor esperado (hFFFFFFFFFFFFFFFF...)", i);
