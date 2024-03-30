@@ -23,15 +23,23 @@ integer i;
 
 data_memory #(.W(W), .N(N)) dut (
     .clk(clk),
+    .rst(rst),
     .MemRead(memread),
     .MemWrite(memwrite),
     .write_data(wrt_data),
     .read_data(rd_data),
     .address(addr)
 );
+initial forever begin
+clk=~clk;
+#1;
+end
 initial begin
 clk=0;
+rst=1;
+#10;
 rst=0;
+
 
 memread=0;
 memwrite=0;
