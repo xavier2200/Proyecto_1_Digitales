@@ -11,7 +11,7 @@ logic [3:0] alu_instr;
 
 integer i;
 
-ALU_CONTROL dut#(.width_instruction(width_inst))(
+ALU_CONTROL #(.width_instruction(width_inst)) dut (
     .instruccion(inst),
     .ALU_OP(alu_oper),
     .alu_inst(alu_instr)

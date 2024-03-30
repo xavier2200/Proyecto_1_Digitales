@@ -3,7 +3,7 @@ module ALU #(
 ) (
     input logic [DATA_WIDTH-1:0] data_rs1,
     input logic [DATA_WIDTH-1:0] source_2,
-    input logic [3:0] alu_inst,
+    input logic [1:0] alu_inst,
 
     output logic [DATA_WIDTH-1:0] ALU_result,
     output logic zero
@@ -25,10 +25,10 @@ end
 always @(*) begin
     case(alu_inst)
 
-        4'b0010 : ALU_result = data_rs1 + source_2;  //suma
-        4'b0110 : ALU_result = data_rs1 - source_2;  //resta
-        4'b0000 : ALU_result = data_rs1 & source_2;  //AND
-        4'b0001 : ALU_result = data_rs1 | source_2; //OR
+        2'b00 : ALU_result = data_rs1 + source_2;  //suma
+        2'b01 : ALU_result = data_rs1 - source_2;  //resta
+        2'b10 : ALU_result = data_rs1 & source_2;  //AND
+        2'b11 : ALU_result = data_rs1 | source_2; //OR
 
         default ALU_result=data_rs1 + source_2;
 endcase

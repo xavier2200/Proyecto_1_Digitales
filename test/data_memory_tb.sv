@@ -1,37 +1,50 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 
 module data_memory_tb;
 
 parameter W = 32;
 parameter N = 5;
 
-logic clk = 0;
-logic rst = 0;
-
-logic memread = 0;
-logic memwrite = 0;         
+         
 
 logic [W-1:0] wrt_data;      //dato a almacenar
 
 logic [W-1:0] rd_data;
 
-logic [$clog2(N)-1:0] addr;
+logic [N-1:0] addr;
 
-integer i
+logic clk;
+logic rst;
 
-data_memory dut#(.W(W), .N(N))(
+logic memread;
+logic memwrite;
+
+integer i;
+
+data_memory #(.W(W), .N(N)) dut (
     .clk(clk),
-    .Memread(memread),
-    .Memwrite(memwrite),
+    .MemRead(memread),
+    .MemWrite(memwrite),
     .write_data(wrt_data),
     .read_data(rd_data),
     .address(addr)
 );
+initial begin
+clk=0;
+rst=0;
 
-for (i = 0;i<N ;i=++ ) begin
-    wrt_data=$urandom_range(2**W);
-    #10;
+memread=0;
+memwrite=0;
+
+wrt_data=0;
+addr=0;
+
+for (i = 0;i<N ;i=i+1 ) begin
     memwrite = 1'b1;
+    addr=i;
+    
+    #10;
+    wrt_data=$urandom_range(W);
     #10;                //guarda el dato random
     memwrite = 1'b0;
     #10
@@ -42,5 +55,11 @@ for (i = 0;i<N ;i=++ ) begin
     memread = 1'b0;
 
 end
+
+$finish;
+
+end
+
+
 
 endmodule

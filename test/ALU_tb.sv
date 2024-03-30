@@ -1,80 +1,81 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 
 module ALU_tb;
 
 // Parámetros
-  parameter WIDTH = 8;  // Ancho de los operandos
+  parameter WIDTH = 5;  // Ancho de los operandos
 
   // Señales
   reg [WIDTH-1:0] operand1, operand2;
   reg [1:0] opcode;
   wire [WIDTH-1:0] result;
   wire zero_o;
- integer i;
+ 
   // Instancia de la ALU
-  ALU alu_inst#(.DATA_WIDTH(WIDTH))(
+  ALU #(.DATA_WIDTH(WIDTH)) alu_inst (
     .data_rs1(operand1),
     .source_2(operand2),
-    .alu(opcode),
+    .alu_inst(opcode),
     .ALU_result(result),
-    .zero(zero_o),
+    .zero(zero_o)
   );
 
   // Generación de estímulos
  initial begin
+    integer i;
     operand1 = 0;
     operand2 = 0;
     opcode = 0;
- end
+ 
 
  for (i = 0 ;i<10 ;i=i+1 ) begin
-    
-    if (i=0) begin
+    #10;
+    if (i==0) begin
         operand1 = 5;
         operand2 = 5;
     end
     else begin
     // Establecer operandos
-    operand1 = $urandom_range(2**WIDTH);
-    operand2 = $urandom_range(2**WIDTH);
+    operand1 = $urandom_range(WIDTH);
+    operand2 = $urandom_range(WIDTH);
     end
-
+    #10;
     // Realizar suma
-    opcode = 2'b0010;
-
-    $display("Operand1 = %b", operand1);
-    $display("Operand2 = %b", operand2);
-    $display("Result = %b zero_flag = %b", result,zero_o);
+    opcode = 2'b00;
+    
+    $display("Operand1 = %d", operand1);
+    $display("Operand2 = %d", operand2);
+    $display("Result = %d zero_flag = %b", result,zero_o);
     $display("----------------------------");
 
     #10;
 
     // Realizar resta
-    opcode = 2'b0110;
+    opcode = 2'b01;
 
-    $display("Operand1 = %b", operand1);
-    $display("Operand2 = %b", operand2);
-    $display("Result = %b zero_flag = %b", result,zero_o);
+    $display("Operand1 = %d", operand1);
+    $display("Operand2 = %d", operand2);
+    $display("Result = %d zero_flag = %b", result,zero_o);
     $display("----------------------------");
 
     #10;
 
     // Realizar AND
-    opcode = 2'b0000;
+    opcode = 4'b10;
 
-    $display("Operand1 = %b", operand1);
-    $display("Operand2 = %b", operand2);
-    $display("Result = %b zero_flag = %b", result,zero_o);
+    $display("Operand1 = %d", operand1);
+    $display("Operand2 = %d", operand2);
+    $display("Result = %d zero_flag = %b", result,zero_o);
     $display("----------------------------");
 
     #10;
 
     // Realizar OR
-    opcode = 2'b0001;
+    opcode = 4'b11;
 
-    $display("Operand1 = %b", operand1);
-    $display("Operand2 = %b", operand2);
-    $display("Result = %b zero_flag = %b", result,zero_o);
+    $display("Operand1 = %d", operand1);
+    $display("Operand2 = %d", operand2);
+    $display("Result = %d zero_flag = %b", result,zero_o);
     $display("----------------------------");
     
     #10;
@@ -82,8 +83,9 @@ module ALU_tb;
     // Finalizar la simulación
 
 end
+
     $finish;
- 
-  
+end
+
 
 endmodule
