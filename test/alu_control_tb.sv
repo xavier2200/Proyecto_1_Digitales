@@ -7,15 +7,20 @@ parameter width_inst=32;
 logic [width_inst-1:0] inst;
 logic [1:0]alu_oper;
 
-logic [3:0] alu_instr;
+logic [1:0] alu_instr;
 
-integer i;
+
 
 ALU_CONTROL #(.width_instruction(width_inst)) dut (
     .instruccion(inst),
     .ALU_OP(alu_oper),
     .alu_inst(alu_instr)
 );
+initial begin
+inst=0;
+alu_oper=0;
+
+#10;
 
 alu_oper = 2'b00;
 
@@ -30,24 +35,26 @@ alu_oper = 2'b01;
     #10;
 
 alu_oper = 2'b10;
-    inst=0
+    inst=0;
     $display("ALU_INST = %b", alu_instr);
 
     #10;
 
-    inst = 32'b01000000000000000000000000000000
+    inst = 32'b01000000000000000000000000000000;
     $display("ALU_INST = %b", alu_instr);
 
     #10;
 
-    inst = 32'b01000000000000000000000000000111
+    inst = 32'b00000000000000000111000000000000;
     $display("ALU_INST = %b", alu_instr);
 
     #10;
 
-    inst = 32'b01000000000000000000000000000011
+    inst = 32'b00000000000000000110000000000000;
     $display("ALU_INST = %b", alu_instr);
 
     #10;
-
+    
+    $finish;
+end
 endmodule
