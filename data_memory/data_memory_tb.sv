@@ -1,4 +1,5 @@
-module registro_tb;
+`timescale 100ns / 1ps
+module data_memory_tb;
 
     // Parámetros del módulo
     parameter W = 32;
@@ -7,53 +8,59 @@ module registro_tb;
     // Definición de señales
     logic clk;
     logic [N-1:0] address;
-    logic we;
     logic [W-1:0] write_data;
-    logic [W-1:0] read_data;
+    logic [W-1:0] read_data; 
+    logic MemRead;
+    logic MemWrite;
+    logic rst;
 
     // Instancia del módulo bajo prueba
     data_memory #(W, N) dut (
+        .rst(rst),
         .clk(clk),
         .address(address),
-        .we(we),
+        .MemWrite(MemWrite),
+        .MemRead(MemRead),
         .write_data(write_data),
         .read_data(read_data)
     );
 
     // Generación de clock a 1 kHz
-    always #0.5 clk = ~clk;
+    always #1 clk = ~clk;
 
     initial begin
-        $dumpfile("registro_tb.vcd");
-        $dumpvars(0, registro_tb);
+        $dumpfile("data_memory.vcd");
+        $dumpvars(0, data_memory_tb);
     end
 
-    // Test case: Escribir en todas las posibles direcciones y verificar
+    // Test case: Escribir en todas dlas posibles direcciones y verificar
     initial begin
-        #500; // Esperar un poco para estabilizar la simulación
+        rst = 1;
+        clk = 0;
+        @(posedge clk); // Esperar un poco para estabilizar la simulación
+        rst <= 0;
 
         // Escribir datos en todas las posibles direcciones de memoria
-        for (int i = 0; i < (1 << N); i++) begin
+        for (integer i = 0; i < (1 << N); i++) begin
             address = i; // Dirección de memoria
-            we = 1; // Habilitación de escritura
             write_data = $random; // Datos aleatorios a escribir
-            #1000;
+            MemWrite = 1; // Habilitación de escritura
+            #10;
         end
-        we = 0; // Deshabilitación de escritura
-        #1000;
-
+        MemWrite = 0;
+        
         // Leer datos de todas las direcciones de memoria y verificar si son correctos
-        for (int i = 0; i < (1 << N); i++) begin
+        for (integer i = 0; i < (1 << N); i++) begin
             address = i; // Dirección de memoria
-            #1000;
-            if (read_data !== dut.mem[i+3]) begin
+            MemRead = 1;
+            #10;
+            if (read_data !== dut.mem[i+1]) begin
                 $display("Test case failed at address %d", i);
-                $finish;
-            end
+            end else begin
+                $display("Mem %0d: %h", i, read_data);
+                end
         end
-        $display("Test case passed");
-
-        #1000; // Esperar un poco al final antes de finalizar la simulación
+        #10; // Esperar un poco al final antes de finalizar la simulación
         $finish; // Finalizar la simulación
     end
 
