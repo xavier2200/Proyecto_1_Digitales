@@ -43,24 +43,26 @@ module data_memory_tb;
         // Escribir datos en todas las posibles direcciones de memoria
         for (integer i = 0; i < (1 << N); i++) begin
             address = i; // Dirección de memoria
+            @(posedge clk);
             write_data = $random; // Datos aleatorios a escribir
             MemWrite = 1; // Habilitación de escritura
-            #10;
+            @(posedge clk);
         end
         MemWrite = 0;
         
         // Leer datos de todas las direcciones de memoria y verificar si son correctos
         for (integer i = 0; i < (1 << N); i++) begin
             address = i; // Dirección de memoria
+            @(posedge clk);
             MemRead = 1;
-            #10;
-            if (read_data !== dut.mem[i+1]) begin
+            @(posedge clk);
+            if (read_data !== dut.mem[i]) begin
                 $display("Test case failed at address %d", i);
             end else begin
                 $display("Mem %0d: %h", i, read_data);
                 end
         end
-        #10; // Esperar un poco al final antes de finalizar la simulación
+        @(posedge clk); // Esperar un poco al final antes de finalizar la simulación
         $finish; // Finalizar la simulación
     end
 
