@@ -114,7 +114,7 @@ sumadorpc #(.N(INSTRUC_WIDTH_t)) addPC (
     
 );
 
-sumadorb #(.N(DATA_WIDTH_t) )addBranch(
+sumadorb #(.N(INSTRUC_WIDTH_t) )addBranch(
     .a_i(w_pc_out),
     .b_i(w_shift_to_addbranch),
 

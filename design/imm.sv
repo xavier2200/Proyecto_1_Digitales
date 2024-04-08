@@ -18,7 +18,7 @@ always @* begin
             {7'b0100011} : begin
                 inmediato ={in[N/2-1:25],in[11:7]};			//store double
             end
-            {2'b00} : begin
+            {7'b0000000} : begin
                 inmediato={in[N/2-1],in[7],in[30:25],in[11:8]};		//branch if equal
             end
             
