@@ -1,0 +1,44 @@
+$date
+	Wed Apr 10 17:12:18 2024
+$end
+
+$version
+	Synopsys VCS version R-2020.12-SP2
+$end
+
+$timescale
+	1ps
+$end
+
+$comment Csum: 1 24b3bb5f2930ac93 $end
+
+
+$scope module alu_control_tb $end
+$var reg 32 ! inst [31:0] $end
+$var reg 2 " alu_oper [1:0] $end
+$var reg 2 # alu_instr [1:0] $end
+$upscope $end
+
+$enddefinitions $end
+
+#0
+$dumpvars
+b00 #
+b00 "
+b00000000000000000000000000000000 !
+$end
+#20000
+b01 "
+b01 #
+#30000
+b10 "
+b00 #
+#40000
+b01000000000000000000000000000000 !
+b01 #
+#50000
+b00000000000000000111000000000000 !
+b10 #
+#60000
+b00000000000000000110000000000000 !
+b11 #

@@ -19,10 +19,13 @@ module ALU_tb;
     .ALU_result(result),
     .zero(zero_o)
   );
-
+  integer i;
   // Generación de estímulos
  initial begin
-    integer i;
+    $dumpfile("ALU_tb.vcd"); // Especifica el nombre del archivo VCD
+    $dumpvars(1, ALU_tb); // Define el alcance de la generación del VCD
+ 
+     
     operand1 = 0;
     operand2 = 0;
     opcode = 0;

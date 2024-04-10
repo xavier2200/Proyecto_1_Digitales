@@ -11,12 +11,14 @@ logic [1:0] alu_instr;
 
 
 
-ALU_CONTROL #(.width_instruc(width_inst)) dut (
+ALU_CONTROL #(.width_instruction(width_inst)) dut (
     .instruccion(inst),
     .ALU_OP(alu_oper),
     .alu_inst(alu_instr)
 );
 initial begin
+$dumpfile("alu_control_tb.vcd"); // Especifica el nombre del archivo VCD
+$dumpvars(1, alu_control_tb); // Define el alcance de la generación del VCD
 inst=0;
 alu_oper=0;
 

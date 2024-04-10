@@ -35,6 +35,8 @@ module regfile_64_tb;
   always #5 clk_tb = ~clk_tb; // Invierte el valor de clk_tb cada 5 unidades de tiempo
 
   initial begin
+    $dumpfile("regfile_64_tb.vcd"); // Especifica el nombre del archivo VCD
+    $dumpvars(1, regfile_64_tb); // Define el alcance de la generación del VCD
     rst_tb = 1;
     clk_tb = 0;
     data_in_tb = 0;

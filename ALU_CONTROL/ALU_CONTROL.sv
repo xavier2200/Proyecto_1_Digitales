@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module ALU_CONTROL #(
     parameter width_instruc = 32
 ) (
