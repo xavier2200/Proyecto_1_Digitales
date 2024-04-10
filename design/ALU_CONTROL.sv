@@ -19,17 +19,19 @@ always @(*) begin
         2'b01 : alu_inst = 2'b01; //subtract
         2'b10 : begin
 
-            if (I_30 == 1'b0 && field_3 == 3'b000)
+            if (I_30 == 1'b0 && field_3 == 3'b000) begin
                 alu_inst = 2'b00; //add
-                
-            else if (I_30 == 1'b1 && field_3 == 3'b000)
+            end
+            else if (I_30 == 1'b1 && field_3 == 3'b000)  begin
                 alu_inst = 2'b01; //subtract
-
-            else if (I_30 == 1'b0 && field_3 == 3'b111)
+            end
+            else if (I_30 == 1'b0 && field_3 == 3'b111) begin
                 alu_inst = 2'b10; //and
+            end
 
-            else if (I_30 == 1'b0 && field_3 == 3'b110)
+            else if (I_30 == 1'b0 && field_3 == 3'b110) begin
                 alu_inst = 2'b11; //or
+            end
         end
         default: alu_inst = 2'b00; // Default case
     endcase
