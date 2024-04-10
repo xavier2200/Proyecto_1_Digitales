@@ -17,6 +17,10 @@ imm #() dut(
 
 //casos posibles de instruccion
 initial begin 
+
+  $dumpfile("imm_tb.vcd"); // Especifica el nombre del archivo VCD
+  $dumpvars(1, imm_tb); // Define el alcance de la generación del VCD
+
 inst = 0;
 
 #10;
