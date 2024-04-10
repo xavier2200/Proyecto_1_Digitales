@@ -1,4 +1,4 @@
-`timescale 100ns / 1ps
+//`timescale 100ns / 1ps
 
 
 module processor_top#(
@@ -70,7 +70,7 @@ parameter const_sumador_pc_t = 4             //sumador_pc
     logic w_MemRead; 
     logic w_MemWrite; 
     logic w_Branch;
-    logic w_ALUOp;
+    logic [1:0] w_ALUOp;
     
     logic sel_mux_3;
     logic w_zero;
@@ -83,9 +83,9 @@ parameter const_sumador_pc_t = 4             //sumador_pc
     
     logic [DATA_WIDTH_t-1:0] w_mux1_to_ALU;
     
-    logic [DATA_WIDTH_t-1:0] w_shift_to_addbranch;
+    logic [INSTRUC_WIDTH_t-1:0] w_shift_to_addbranch;
     
-    logic [3:0] w_alu_inst;
+    logic [1:0] w_alu_inst;
     
     logic [DATA_WIDTH_t-1:0] w_ALU_RESULT;
     
@@ -138,9 +138,9 @@ ALU_CONTROL #(.width_instruc(INSTRUC_WIDTH_t)) alu_control_ins (
 
 data_memory #( .W(DATA_WIDTH_t) ,.N(address_data_mem_t)) data_memory_ins (
    .clk(clk_t),
-    
+    .rst(rst_t),
+
    .address(w_ALU_RESULT), //direcición de 'consulta 1'
-    //input logic rst,
    .MemRead(w_MemRead), //habilitación de lectura
    .MemWrite(w_MemWrite), //habilitación de escritura
    .write_data(w_data1), //valor de almacenamiento
