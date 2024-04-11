@@ -24,11 +24,13 @@ module processor_tb;
  
  initial begin
  	$dumpfile("processor.vcd"); // Especifica el nombre del archivo VCD
-        $dumpvars(1, processor_tb); // Define el alcance de la generación del
+     $dumpvars(1, processor_tb); // Define el alcance de la generación del
  rst=1;
- #10
+ clk=0;
+ #10;
  rst=0;
  
  
  end
  
+endmodule

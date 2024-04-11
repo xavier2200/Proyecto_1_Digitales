@@ -17,7 +17,7 @@ parameter N=5
 reg  [W-1:0] mem[(2**N)-1:0] ;
 
 
-always_ff @(posedge clk) begin
+always_ff @(posedge clk or rst) begin
     if (rst) begin
         foreach (mem[i])begin
             mem[i] <= 0;

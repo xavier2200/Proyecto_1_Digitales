@@ -8,7 +8,7 @@ module sumadorpc #(parameter N = 4)(
     
 );
 
-reg [N-1:0] b_i=4;
+reg [N-1:0] b_i=1;
 
 assign sum_o = a_i + b_i;
 
