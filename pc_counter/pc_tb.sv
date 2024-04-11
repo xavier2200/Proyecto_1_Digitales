@@ -25,6 +25,9 @@ module pc_tb;
     
     // Estímulo
     initial begin
+        $dumpfile("pc_tb.vcd"); // Especifica el nombre del archivo VCD
+        $dumpvars(1, pc_tb); // Define el alcance de la generaciÃ³n del VCD
+
         // Inicialización de señales
         PC_next_tb = 0;
         clk_tb = 0;

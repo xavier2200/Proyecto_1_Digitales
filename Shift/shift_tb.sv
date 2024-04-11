@@ -14,6 +14,10 @@ shift #() dut(
 );
 
 initial begin
+
+$dumpfile("shift_tb.vcd"); // Especifica el nombre del archivo VCD
+$dumpvars(1, shift_tb); // Define el alcance de la generación del VCD
+
 in =0;
     for(i=0;i<10;i=i+1) begin
         in=$random;
