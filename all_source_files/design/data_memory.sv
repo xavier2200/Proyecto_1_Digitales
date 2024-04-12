@@ -16,19 +16,14 @@ parameter N=5
 //creamos propiamente el registro: 
 reg  [W-1:0] mem[(2**N)-1:0] ;
 
-
-always_ff @(posedge clk or rst) begin
-    if (rst) begin
-        foreach (mem[i])begin
-            mem[i] <= 0;
-        end
-        read_data <= 0;
-    end
-    else begin
-    if (MemWrite) mem[address]<=write_data;
-    if (MemRead) read_data <= mem[address];
-    end
+initial begin
+        $readmemh("programa_inst.hex",mem,0,9);
 end
+
+always_ff @(posedge clk) begin
+    if (MemWrite) mem[address[(2**N)-1:2]]<=write_data;
+end
+assign read_data = (MemRead & !rst) ? mem[address[(2**N)-1:2]] : 0;
 
 endmodule
 

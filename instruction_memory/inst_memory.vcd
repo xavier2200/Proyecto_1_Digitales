@@ -1,0 +1,86 @@
+$date
+	Thu Apr 11 18:57:23 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module inst_memory_tb $end
+$var wire 32 ! read_data [31:0] $end
+$var parameter 32 " N $end
+$var parameter 32 # W $end
+$var reg 32 $ address [31:0] $end
+$scope module dut $end
+$var wire 32 % address [31:0] $end
+$var wire 32 & instruction [31:0] $end
+$var parameter 32 ' ADDRESS_WIDTH $end
+$var parameter 32 ( DATA_WIDTH $end
+$var parameter 32 ) MEM_SIZE $end
+$upscope $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 * i [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 )
+b100000 (
+b100000 '
+b100000 #
+b101 "
+$end
+#0
+$dumpvars
+b0 *
+b110100010010011000100011 &
+b0 %
+b0 $
+b110100010010011000100011 !
+$end
+#1000000
+b111001011000011100010011 !
+b111001011000011100010011 &
+b100 $
+b100 %
+b100 *
+#2000000
+b111100000000011110010011 !
+b111100000000011110010011 &
+b1000 $
+b1000 %
+b1000 *
+#3000000
+b101000010010100000100011 !
+b101000010010100000100011 &
+b1100 $
+b1100 %
+b1100 *
+#4000000
+b101101011000100100110011 !
+b101101011000100100110011 &
+b10000 $
+b10000 %
+b10000 *
+#5000000
+b110000000000100101100011 !
+b110000000000100101100011 &
+b10100 $
+b10100 %
+b10100 *
+#6000000
+b110100010010101001110011 !
+b110100010010101001110011 &
+b11000 $
+b11000 %
+b11000 *
+#7000000
+b111001011000101110000011 !
+b111001011000101110000011 &
+b11100 $
+b11100 %
+b11100 *
+#8000000
+b100000 *
