@@ -46,10 +46,7 @@ parameter const_sumador_pc_t = 4             //sumador_pc
 
 ) (
     
-    input logic rst_t,clk_t,
-    
-    output logic [DATA_WIDTH_t-1:0] ALU_O_t,
-    output logic [DATA_WIDTH_t-1:0] read_data_o_t
+    input logic rst_t,clk_t
     
     );
  
@@ -143,7 +140,7 @@ data_memory #( .W(DATA_WIDTH_t) ,.N(address_data_mem_t)) data_memory_ins (
    .address(w_ALU_RESULT), //direcición de 'consulta 1'
    .MemRead(w_MemRead), //habilitación de lectura
    .MemWrite(w_MemWrite), //habilitación de escritura
-   .write_data(w_data1), //valor de almacenamiento
+   .write_data(w_data2), //valor de almacenamiento
     
     //a la salida mostramos el contenido de la memoria
    .read_data(w_data_memory_read)

@@ -13,7 +13,7 @@ module inst_memory #(
 
 
     initial begin
-        $readmemh("programa.hex",inst_memory,0,9);
+        $readmemh("program_sencillo.hex",inst_memory,0,9);
     end
 
     assign instruction=inst_memory[address[9:2]]; //hacer en data memory
